@@ -1,11 +1,5 @@
 package tp.car;
 
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.*;
-
 public class Race {
 
     private final Track track;
@@ -15,8 +9,17 @@ public class Race {
     }
 
     public void start() {
-        track.getCars().stream()
-                .map(Car::getId)
-                .forEach(System.out::print);
+        startCarEngines();
+        for (int i = 0; i < 20; i++) {
+            for (Car car : track.getCars())
+                car.drive();
+        }
+        for (Car car : track.getCars())
+            System.out.println(car.getKmCounter());
+    }
+
+    private void startCarEngines() {
+        for (Car car : track.getCars())
+            car.startEngine();
     }
 }
